@@ -28,17 +28,6 @@ public class AnimalController : MonoBehaviour
         {
             transform.position += Vector3.down * fallSpeed * Time.deltaTime;
         }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            PopBalloons();
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            KeepBalloons();
-        }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
