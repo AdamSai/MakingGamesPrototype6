@@ -5,28 +5,42 @@ using UnityEngine.UI;
 
 public class AnimalController : MonoBehaviour
 {
-  [SerializeField] private float fallSpeed = 10f;
-  [SerializeField] private Animator animator;
-  public string noteName;
-  private AudioSource audioSource;
-  private AnimalNote note;
-  private Button button;
-  private bool isFalling;
+    [SerializeField] private float fallSpeed = 10f;
+    [SerializeField] private Animator animalAnimator;
+    [SerializeField] private GameObject balloons;
+    [SerializeField] private Animator balloonAnimator;
+    private AudioSource audioSource;
 
-  private Collider2D airTrigger;
+    private Button button;
+    private bool isFalling;
 
-  // Start is called before the first frame update
-  void Start()
-  {
-    audioSource = GetComponent<AudioSource>();
-    animator = GetComponentInChildren<Animator>();
-    note = new AnimalNote(noteName, NotesConfig.notes[noteName]);
-  }
+    private Collider2D airTrigger;
+    public string noteName;
 
-  // Update is called once per frame
-  void Update()
-  {
-    if (isFalling)
+    // Start is called before the first frame update
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        animalAnimator = GetComponentInChildren<Animator>();
+        balloonAnimator = balloons.GetComponent<Animator>();
+        note = new AnimalNote(noteName, NotesConfig.notes[noteName]);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (isFalling)
+        {
+            transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+            KeepBalloons();
+        if (Input.GetKeyDown(KeyCode.F))
+            PopBalloons();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
       transform.position += Vector3.down * fallSpeed * Time.deltaTime;
     }
@@ -38,10 +52,22 @@ public class AnimalController : MonoBehaviour
 
     if (Input.GetKeyDown(KeyCode.S))
     {
-      KeepBalloons();
+        isFalling = true;
+        animalAnimator.enabled = true;
+        transform.position = fallPosition;
+        // TODO: Spawn balloons
+        // TODO: Play sound
+
+
     }
 
-  }
+    private void LandAnimal()
+    {
+        isFalling = false;
+        // TODO: Pop balloons
+        animalAnimator.enabled = false;
+        GamerManager.landedAnimals++;
+    }
 
   private void OnTriggerEnter2D(Collider2D collision)
   {
