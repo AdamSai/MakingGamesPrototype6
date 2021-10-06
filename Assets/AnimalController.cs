@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class AnimalController : MonoBehaviour
 {
     [SerializeField] private float fallSpeed = 10f;
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator animalAnimator;
+    [SerializeField] private GameObject balloons;
+    [SerializeField] private Animator balloonAnimator;
     private AudioSource audioSource;
 
     private Button button;
@@ -15,10 +17,11 @@ public class AnimalController : MonoBehaviour
     private Collider2D airTrigger;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        animator = GetComponentInChildren<Animator>();
+        animalAnimator = GetComponentInChildren<Animator>();
+        balloonAnimator = balloons.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -50,6 +53,8 @@ public class AnimalController : MonoBehaviour
     /// </summary>
     public void PopBalloons()
     {
+        //balloonAnimator.SetBool("isPopped", true);
+        balloonAnimator.Play("Pop");
         fallSpeed += 10f;
         Physics2D.IgnoreCollision(airTrigger, GetComponent<BoxCollider2D>());
         isFalling = true;
@@ -67,8 +72,7 @@ public class AnimalController : MonoBehaviour
     public void SelectAnimal(Vector3 fallPosition)
     {
         isFalling = true;
-        animator.enabled = true;
-        print("Animator enabled? " + animator.enabled);
+        animalAnimator.enabled = true;
         transform.position = fallPosition;
         // TODO: Spawn balloons
         // TODO: Play sound
@@ -80,7 +84,7 @@ public class AnimalController : MonoBehaviour
     {
         isFalling = false;
         // TODO: Pop balloons
-        animator.enabled = false;
+        animalAnimator.enabled = false;
         GamerManager.landedAnimals++;
     }
 
