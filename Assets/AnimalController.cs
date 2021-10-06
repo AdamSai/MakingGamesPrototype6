@@ -12,6 +12,8 @@ public class AnimalController : MonoBehaviour
     private Button button;
     private bool isFalling;
 
+    private Collider2D airTrigger;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +28,50 @@ public class AnimalController : MonoBehaviour
         {
             transform.position += Vector3.down * fallSpeed * Time.deltaTime;
         }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            PopBalloons();
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            KeepBalloons();
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        LandAnimal();
+        if (collision.CompareTag("AirTrigger"))
+        {
+            isFalling = false;
+            airTrigger = collision;
+            GamerManager.CompareNotes();
+        }
+        else if (collision.CompareTag("GroundTrigger"))
+        {
+            LandAnimal();
+        }
+    }
+
+
+    /// <summary>
+    /// Call this on badly composed notes
+    /// </summary>
+    public void PopBalloons()
+    {
+        fallSpeed += 10f;
+        Physics2D.IgnoreCollision(airTrigger, GetComponent<BoxCollider2D>());
+        isFalling = true;
+    }
+    /// <summary>
+    /// Call this on succesfully composed notes
+    /// </summary>
+    public void KeepBalloons()
+    {
+        isFalling = true;
+        Physics2D.IgnoreCollision(airTrigger, GetComponent<BoxCollider2D>());
     }
 
     // Teleport animal and make it float downwards

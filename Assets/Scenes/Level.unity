@@ -231,7 +231,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 47513253}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -423,7 +423,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 194712824}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -560,8 +560,8 @@ GameObject:
   - component: {fileID: 284172092}
   - component: {fileID: 284172091}
   m_Layer: 0
-  m_Name: GroundCollider (1)
-  m_TagString: Untagged
+  m_Name: AirTrigger
+  m_TagString: AirTrigger
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -616,7 +616,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &357372423
 GameObject:
@@ -696,7 +696,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 357372426}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -828,7 +828,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 383187914}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -960,7 +960,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 478094384}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -1201,7 +1201,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 877764941}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -1267,8 +1267,8 @@ GameObject:
   - component: {fileID: 1052272947}
   - component: {fileID: 1052272949}
   m_Layer: 0
-  m_Name: GroundCollider
-  m_TagString: Untagged
+  m_Name: GroundTrigger
+  m_TagString: GroundTrigger
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1311,7 +1311,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1052272949
 MonoBehaviour:
@@ -1403,7 +1403,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1108028233}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -1535,7 +1535,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1109753008}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -1833,7 +1833,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1703480972}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2094,7 +2094,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1917160552}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2177,7 +2177,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2020875396
 MonoBehaviour:

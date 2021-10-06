@@ -58,5 +58,9 @@ public class GamerManager : MonoBehaviour
 
     }
 
+    public static void CompareNotes()
+    {
+        //TODO: Loop through spawnedAnimals and compare notes
+    }
 
 }
