@@ -5,69 +5,41 @@ using UnityEngine.UI;
 
 public class AnimalController : MonoBehaviour
 {
-    [SerializeField] private float fallSpeed = 10f;
-    [SerializeField] private Animator animalAnimator;
-    [SerializeField] private GameObject balloons;
-    [SerializeField] private Animator balloonAnimator;
-    private AudioSource audioSource;
+  [SerializeField] private float fallSpeed = 10f;
+  [SerializeField] private Animator animalAnimator;
+  [SerializeField] private GameObject balloons;
+  [SerializeField] private Animator balloonAnimator;
+  private AudioSource audioSource;
+  private AnimalNote note;
 
-    private Button button;
-    private bool isFalling;
+  private Button button;
+  private bool isFalling;
 
-    private Collider2D airTrigger;
-    public string noteName;
+  private Collider2D airTrigger;
+  public string noteName;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-        animalAnimator = GetComponentInChildren<Animator>();
-        balloonAnimator = balloons.GetComponent<Animator>();
-        note = new AnimalNote(noteName, NotesConfig.notes[noteName]);
-    }
+  // Start is called before the first frame update
+  void Awake()
+  {
+    audioSource = GetComponent<AudioSource>();
+    animalAnimator = GetComponentInChildren<Animator>();
+    balloonAnimator = balloons.GetComponent<Animator>();
+    note = new AnimalNote(noteName, NotesConfig.notes[noteName]);
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (isFalling)
-        {
-            transform.position += Vector3.down * fallSpeed * Time.deltaTime;
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-            KeepBalloons();
-        if (Input.GetKeyDown(KeyCode.F))
-            PopBalloons();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+  // Update is called once per frame
+  void Update()
+  {
+    if (isFalling)
     {
       transform.position += Vector3.down * fallSpeed * Time.deltaTime;
     }
 
-    if (Input.GetKeyDown(KeyCode.F))
-    {
-      PopBalloons();
-    }
-
     if (Input.GetKeyDown(KeyCode.S))
-    {
-        isFalling = true;
-        animalAnimator.enabled = true;
-        transform.position = fallPosition;
-        // TODO: Spawn balloons
-        // TODO: Play sound
-
-
-    }
-
-    private void LandAnimal()
-    {
-        isFalling = false;
-        // TODO: Pop balloons
-        animalAnimator.enabled = false;
-        GamerManager.landedAnimals++;
-    }
+      KeepBalloons();
+    if (Input.GetKeyDown(KeyCode.F))
+      PopBalloons();
+  }
 
   private void OnTriggerEnter2D(Collider2D collision)
   {
@@ -93,6 +65,7 @@ public class AnimalController : MonoBehaviour
   /// </summary>
   public void PopBalloons()
   {
+    balloonAnimator.Play("Pop");
     fallSpeed += 10f;
     Physics2D.IgnoreCollision(airTrigger, GetComponent<BoxCollider2D>());
     isFalling = true;
@@ -110,8 +83,7 @@ public class AnimalController : MonoBehaviour
   public void SelectAnimal(Vector3 fallPosition)
   {
     isFalling = true;
-    animator.enabled = true;
-    print("Animator enabled? " + animator.enabled);
+    animalAnimator.enabled = true;
     transform.position = fallPosition;
     // TODO: Spawn balloons
     // TODO: Play sound
@@ -123,7 +95,7 @@ public class AnimalController : MonoBehaviour
   {
     isFalling = false;
     // TODO: Pop balloons
-    animator.enabled = false;
+    animalAnimator.enabled = false;
     GamerManager.landedAnimals++;
   }
 

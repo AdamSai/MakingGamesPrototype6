@@ -51,6 +51,7 @@ MonoBehaviour:
   animalAnimator: {fileID: 0}
   balloons: {fileID: 4458616022801721844}
   balloonAnimator: {fileID: 0}
+  noteName: A
 --- !u!82 &1560747599503044643
 AudioSource:
   m_ObjectHideFlags: 0
