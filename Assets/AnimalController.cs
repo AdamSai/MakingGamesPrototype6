@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class AnimalController : MonoBehaviour
 {
     [SerializeField] private float fallSpeed = 10f;
-    private bool isFalling;
     [SerializeField] private Animator animator;
     private AudioSource audioSource;
 
     private Button button;
+    private bool isFalling;
 
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        animator.enabled = false;
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -38,6 +38,7 @@ public class AnimalController : MonoBehaviour
     {
         isFalling = true;
         animator.enabled = true;
+        print("Animator enabled? " + animator.enabled);
         transform.position = fallPosition;
         // TODO: Spawn balloons
         // TODO: Play sound
@@ -49,7 +50,7 @@ public class AnimalController : MonoBehaviour
     {
         isFalling = false;
         // TODO: Pop balloons
-
+        animator.enabled = false;
         GamerManager.landedAnimals++;
     }
 

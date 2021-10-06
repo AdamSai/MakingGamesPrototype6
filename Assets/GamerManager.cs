@@ -35,12 +35,14 @@ public class GamerManager : MonoBehaviour
         landedAnimals = 0;
         // TODO: Play sounds? 
         yield return new WaitForSeconds(endOfRoundWaitTime);
+
         foreach (var animal in spawnedAnimals)
             Destroy(animal);
         foreach (var button in animalButtons)
         {
             button.gameObject.SetActive(true);
         }
+        nextPos = 0;
     }
 
     public void SelectAnimal(int id)
