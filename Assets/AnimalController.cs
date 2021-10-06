@@ -5,103 +5,109 @@ using UnityEngine.UI;
 
 public class AnimalController : MonoBehaviour
 {
-    [SerializeField] private float fallSpeed = 10f;
-    [SerializeField] private Animator animator;
-    private AudioSource audioSource;
+  [SerializeField] private float fallSpeed = 10f;
+  [SerializeField] private Animator animator;
+  public string noteName;
+  private AudioSource audioSource;
+  private AnimalNote note;
+  private Button button;
+  private bool isFalling;
 
-    private Button button;
-    private bool isFalling;
+  private Collider2D airTrigger;
 
-    private Collider2D airTrigger;
+  // Start is called before the first frame update
+  void Start()
+  {
+    audioSource = GetComponent<AudioSource>();
+    animator = GetComponentInChildren<Animator>();
+    note = new AnimalNote(noteName, NotesConfig.notes[noteName]);
+  }
 
-    // Start is called before the first frame update
-    void Start()
+  // Update is called once per frame
+  void Update()
+  {
+    if (isFalling)
     {
-        audioSource = GetComponent<AudioSource>();
-        animator = GetComponentInChildren<Animator>();
+      transform.position += Vector3.down * fallSpeed * Time.deltaTime;
     }
 
-    // Update is called once per frame
-    void Update()
+    if (Input.GetKeyDown(KeyCode.F))
     {
-        if (isFalling)
-        {
-            transform.position += Vector3.down * fallSpeed * Time.deltaTime;
-        }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            PopBalloons();
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            KeepBalloons();
-        }
-
+      PopBalloons();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    if (Input.GetKeyDown(KeyCode.S))
     {
-        if (collision.CompareTag("AirTrigger"))
-        {
-            isFalling = false;
-            airTrigger = collision;
-            GamerManager.CompareNotes();
-        }
-        else if (collision.CompareTag("GroundTrigger"))
-        {
-            LandAnimal();
-        }
+      KeepBalloons();
     }
 
+  }
 
-    /// <summary>
-    /// Call this on badly composed notes
-    /// </summary>
-    public void PopBalloons()
+  private void OnTriggerEnter2D(Collider2D collision)
+  {
+    if (collision.CompareTag("AirTrigger"))
     {
-        fallSpeed += 10f;
-        Physics2D.IgnoreCollision(airTrigger, GetComponent<BoxCollider2D>());
-        isFalling = true;
+      isFalling = false;
+      airTrigger = collision;
+      GamerManager.singingAnimals++;
     }
-    /// <summary>
-    /// Call this on succesfully composed notes
-    /// </summary>
-    public void KeepBalloons()
+    else if (collision.CompareTag("GroundTrigger"))
     {
-        isFalling = true;
-        Physics2D.IgnoreCollision(airTrigger, GetComponent<BoxCollider2D>());
+      LandAnimal();
     }
+  }
 
-    // Teleport animal and make it float downwards
-    public void SelectAnimal(Vector3 fallPosition)
-    {
-        isFalling = true;
-        animator.enabled = true;
-        print("Animator enabled? " + animator.enabled);
-        transform.position = fallPosition;
-        // TODO: Spawn balloons
-        // TODO: Play sound
+  public AnimalNote getNote()
+  {
+    return this.note;
+  }
+
+  /// <summary>
+  /// Call this on badly composed notes
+  /// </summary>
+  public void PopBalloons()
+  {
+    fallSpeed += 10f;
+    Physics2D.IgnoreCollision(airTrigger, GetComponent<BoxCollider2D>());
+    isFalling = true;
+  }
+  /// <summary>
+  /// Call this on succesfully composed notes
+  /// </summary>
+  public void KeepBalloons()
+  {
+    isFalling = true;
+    Physics2D.IgnoreCollision(airTrigger, GetComponent<BoxCollider2D>());
+  }
+
+  // Teleport animal and make it float downwards
+  public void SelectAnimal(Vector3 fallPosition)
+  {
+    isFalling = true;
+    animator.enabled = true;
+    print("Animator enabled? " + animator.enabled);
+    transform.position = fallPosition;
+    // TODO: Spawn balloons
+    // TODO: Play sound
 
 
-    }
+  }
 
-    private void LandAnimal()
-    {
-        isFalling = false;
-        // TODO: Pop balloons
-        animator.enabled = false;
-        GamerManager.landedAnimals++;
-    }
+  private void LandAnimal()
+  {
+    isFalling = false;
+    // TODO: Pop balloons
+    animator.enabled = false;
+    GamerManager.landedAnimals++;
+  }
 
-    public void PlaySound()
-    {
-        audioSource.Play();
-    }
+  public void PlaySound()
+  {
+    audioSource.Play();
+  }
 
-    public void StopSound()
-    {
-        audioSource.Stop();
-    }
+  public void StopSound()
+  {
+    audioSource.Stop();
+  }
 }

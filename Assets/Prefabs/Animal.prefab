@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallSpeed: 4
   animator: {fileID: 7134087714486930532}
+  noteName: B
 --- !u!82 &8321848620701645825
 AudioSource:
   m_ObjectHideFlags: 0
